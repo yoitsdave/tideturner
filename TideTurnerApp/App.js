@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import Button from './components/Button';
 import {
   StyleSheet,
   View,
@@ -19,11 +20,6 @@ const getGenderOpts = () => {
 
   ]
 }
-
-
-
-
-
 
 const Sign = () => {
   var genderOpts = getGenderOpts();
@@ -63,15 +59,10 @@ const Sign = () => {
   };
 
 
+
   return (
     <View style={styles.container}>
-      
-
-      
       <View>
-
-
-
       <Text style={styles.label}>Name Of Filter</Text>
       <Controller
         name="company"
@@ -103,11 +94,11 @@ const Sign = () => {
       />
       </View>
    
-
+      <View style={styles.footerContainer}>
+        <Button label="Print Value" />
+      </View>
 
      
-
-
     </View>
   );
 };
@@ -124,7 +115,7 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: "#B7B7B7",
     borderRadius: 7,
-    borderWidth: 1,
+    borderWidth: 5,
     fontSize: 15,
     height: 50,
     marginHorizontal: 10,
@@ -136,7 +127,7 @@ const styles = StyleSheet.create({
     marginStart: 10,
   },
   placeholderStyles: {
-    color: "grey",
+    color: "blue",
   },
 
   dropdownCompany: {
@@ -145,34 +136,14 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     borderColor: "#B7B7B7",
-    height: 50,
+    height: 8,
   },
-  getStarted: {
-    backgroundColor: "#5188E3",
-    color: "white",
-    textAlign: "center",
-    marginHorizontal: 60,
-    paddingVertical: 15,
-    borderRadius: 50,
-    marginTop: 20,
-  },
-  logIn: {
-    flex: 1,
-    justifyContent: "flex-end",
-    marginBottom: 10,
-  },
-  links: {
-    textAlign: "center",
-    textDecorationLine: "underline",
-    color: "#758580",
-  },
-
   container: {
     backgroundColor: 'gray',
-    width: 100,
+    width: 500,
     height: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'left',
+    alignItems: 'left',
     borderRadius: 10,
   },
   text: {
