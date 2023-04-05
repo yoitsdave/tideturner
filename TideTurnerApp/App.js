@@ -20,6 +20,11 @@ const getGenderOpts = () => {
   ]
 }
 
+
+
+
+
+
 const Sign = () => {
   var genderOpts = getGenderOpts();
 
@@ -38,7 +43,7 @@ const Sign = () => {
   const onGenderOpen = useCallback(() => {
     setCompanyOpen(false);
   }, []);
-
+  
   const onCompanyOpen = useCallback(() => {
     setGenderOpen(false);
   }, []);
@@ -46,6 +51,18 @@ const Sign = () => {
   const onSubmit = (data) => {
     console.log(data, "data");
   };
+
+  const onCompanyChange = (value) => {
+    setCompanyValue(value);
+    setCompany(company.map(item => {
+      return {
+        ...item,
+        selected: item.value === value
+      };
+    }));
+  };
+
+
   return (
     <View style={styles.container}>
       
@@ -94,6 +111,10 @@ const Sign = () => {
     </View>
   );
 };
+
+
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -145,6 +166,21 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     color: "#758580",
   },
+
+  container: {
+    backgroundColor: 'gray',
+    width: 100,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  text: {
+    color: 'white',
+    fontSize: 20,
+  },
 });
+  
+
 
 export default Sign;
