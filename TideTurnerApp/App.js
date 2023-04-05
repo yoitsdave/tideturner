@@ -10,16 +10,22 @@ import DropDownPicker from "react-native-dropdown-picker";
 import Header from "./components/Header";
 import {useForm, Controller} from 'react-hook-form';
 
-const Sign = () => {
-  const [genderOpen, setGenderOpen] = useState(false);
-  const [genderValue, setGenderValue] = useState(null);
-  const [gender, setGender] = useState([
+const getGenderOpts = () => {
+  return [
     { label: "Chlora Ball", value: "male" },
     { label: "In-Line Filter", value: "female" },
     { label: "Carbon Filter", value: "neutral" },
     { label: "Reverse Osmosis Filter", value: "neutral" },
 
-  ]);
+  ]
+}
+
+const Sign = () => {
+  var genderOpts = getGenderOpts();
+
+  const [genderOpen, setGenderOpen] = useState(false);
+  const [genderValue, setGenderValue] = useState(null);
+  const [gender, setGender] = useState(genderOpts);
   const [companyOpen, setCompanyOpen] = useState(false);
   const [companyValue, setCompanyValue] = useState(null);
   const [company, setComapny] = useState([
@@ -82,14 +88,9 @@ const Sign = () => {
    
 
 
-      <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-        <Text style={styles.getStarted}>Get Started</Text>
-      </TouchableOpacity>
+     
 
 
-      <TouchableOpacity style={styles.logIn}>
-        <Text style={styles.links}>I have an account</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -116,11 +117,7 @@ const styles = StyleSheet.create({
   placeholderStyles: {
     color: "grey",
   },
-  dropdownGender: {
-    marginHorizontal: 10,
-    width: "50%",
-    marginBottom: 15,
-  },
+
   dropdownCompany: {
     marginHorizontal: 10,
     marginBottom: 15,
