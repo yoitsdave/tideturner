@@ -13,25 +13,24 @@ import {useForm, Controller} from 'react-hook-form';
 
 export default SetupFilter = ({navigation}) => {
 
-const getGenderOpts = () => {
-  return [
-    { label: "Chlora Ball", value: "male" },
-    { label: "In-Line Filter", value: "female" },
-    { label: "Carbon Filter", value: "neutral" },
-    { label: "Reverse Osmosis Filter", value: "neutral" },
+  const getGenderOpts = () => {
+    return [
+      { label: "Chlora Ball", value: "male" },
+      { label: "In-Line Filter", value: "female" },
+      { label: "Carbon Filter", value: "neutral" },
+      { label: "Reverse Osmosis Filter", value: "neutral" },
 
-  ]
-}
+    ]
+  }
 
-getInputValue = (e) => {
-  const value = e.target.value;
-  console.log('value: ', value);
-  this.setState({
-      inputOne: Number(e.target.value)
-  });  
-}
+  getInputValue = (e) => {
+    const value = e.target.value;
+    console.log('value: ', value);
+    this.setState({
+        inputOne: Number(e.target.value)
+    });  
+  }
 
-const Sign = () => {
   var genderOpts = getGenderOpts();
 
   const [genderOpen, setGenderOpen] = useState(false);
@@ -67,7 +66,6 @@ const Sign = () => {
       };
     }));
   };
-
 
   const styles = StyleSheet.create({
     container: {
@@ -113,8 +111,6 @@ const Sign = () => {
       fontSize: 20,
     },
   });
-    
-
 
   return (
     <View style={styles.container}>
@@ -153,6 +149,3 @@ const Sign = () => {
     </View>
   );
 };
-
-
-}

@@ -17,7 +17,6 @@ const Input = ({ label, value, onChangeText }) => {
   );
 };
 
-const NewWash = () => {
   const [washingMachineSize, setWashingMachineSize] = useState('');
   const [gallonsOfWater, setGallonsOfWater] = useState('');
   const [timeTaken, setTimeTaken] = useState('');
@@ -68,5 +67,3 @@ const NewWash = () => {
     </View>
   );
 };
-
-}
