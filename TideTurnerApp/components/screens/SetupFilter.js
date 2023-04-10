@@ -69,6 +69,52 @@ const Sign = () => {
   };
 
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    input: {
+      borderStyle: "solid",
+      borderColor: "#B7B7B7",
+      borderRadius: 7,
+      borderWidth: 5,
+      fontSize: 15,
+      height: 50,
+      marginHorizontal: 10,
+      paddingStart: 10,
+      marginBottom: 15,
+    },
+    label: {
+      marginBottom: 7,
+      marginStart: 10,
+    },
+    placeholderStyles: {
+      color: "blue",
+    },
+  
+    dropdownCompany: {
+      marginHorizontal: 10,
+      marginBottom: 15,
+    },
+    dropdown: {
+      borderColor: "#B7B7B7",
+      height: 8,
+    },
+    container: {
+      backgroundColor: 'gray',
+      width: 500,
+      height: 100,
+      justifyContent: 'left',
+      alignItems: 'left',
+      borderRadius: 10,
+    },
+    text: {
+      color: 'white',
+      fontSize: 20,
+    },
+  });
+    
+
 
   return (
     <View style={styles.container}>
@@ -108,51 +154,5 @@ const Sign = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  input: {
-    borderStyle: "solid",
-    borderColor: "#B7B7B7",
-    borderRadius: 7,
-    borderWidth: 5,
-    fontSize: 15,
-    height: 50,
-    marginHorizontal: 10,
-    paddingStart: 10,
-    marginBottom: 15,
-  },
-  label: {
-    marginBottom: 7,
-    marginStart: 10,
-  },
-  placeholderStyles: {
-    color: "blue",
-  },
 
-  dropdownCompany: {
-    marginHorizontal: 10,
-    marginBottom: 15,
-  },
-  dropdown: {
-    borderColor: "#B7B7B7",
-    height: 8,
-  },
-  container: {
-    backgroundColor: 'gray',
-    width: 500,
-    height: 100,
-    justifyContent: 'left',
-    alignItems: 'left',
-    borderRadius: 10,
-  },
-  text: {
-    color: 'white',
-    fontSize: 20,
-  },
-});
-  
-
-
-export default Sign;
+}
