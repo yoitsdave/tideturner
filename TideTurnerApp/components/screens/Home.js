@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 
 export default HomeScreen = ({navigation}) => {
   const [textEntries, setTextEntries] = useState([
@@ -36,6 +36,43 @@ export default HomeScreen = ({navigation}) => {
   
   return (
     <View style={styles.container}>
+
+    <Button
+      title="Login"
+      onPress={() =>
+        navigation.navigate('Login')
+      }
+    />
+
+    <Button
+      title="NewWash"
+      onPress={() =>
+        navigation.navigate('NewWash')
+      }
+    />
+
+    <Button
+      title="Register"
+      onPress={() =>
+        navigation.navigate('Register')
+      }
+    />
+
+    <Button
+      title="SetupFilter"
+      onPress={() =>
+        navigation.navigate('SetupFilter')
+      }
+    />
+
+    <Button
+      title="SetupMachine"
+      onPress={() =>
+        navigation.navigate('SetupMachine')
+      }
+    />
+
+
       <ScrollView>
         {textEntries.map((entry, index) => (
           <View key={index} style={styles.textEntryContainer}>
