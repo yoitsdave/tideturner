@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from rest_framework import routers
 from tideturnerweb import views
 
@@ -27,6 +27,7 @@ router.register(r'follow', views.FollowingViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
+    # path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    re_path(r'^auth/', include('drf_social_oauth2.urls', namespace='drf'))
 ]
