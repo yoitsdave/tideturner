@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
-export default function App() {
+export default HomeScreen = ({navigation}) => {
   const [textEntries, setTextEntries] = useState([
     'Entry 1',
     'Entry 2',
@@ -15,6 +15,25 @@ export default function App() {
     'Entry 10',
   ]);
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: 50,
+    },
+    textEntryContainer: {
+      borderBottomWidth: 1,
+      borderBottomColor: '#ccc',
+      paddingVertical: 20,
+      paddingHorizontal: 10,
+    },
+    textEntry: {
+      fontSize: 16,
+    },
+  });
+  
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -27,22 +46,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 50,
-  },
-  textEntryContainer: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-  },
-  textEntry: {
-    fontSize: 16,
-  },
-});

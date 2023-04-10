@@ -7,10 +7,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-import Header from "./components/Header";
+// import Header from "./components/Header";
 import {useForm, Controller} from 'react-hook-form';
 
 
+export default SetupFilter = ({navigation}) => {
 
 const getGenderOpts = () => {
   return [
