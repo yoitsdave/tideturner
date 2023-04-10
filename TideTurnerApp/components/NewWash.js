@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
+import { withNavigation } from 'react-navigation';
+
 
 const Input = ({ label, value, onChangeText }) => {
   return (
@@ -14,7 +16,7 @@ const Input = ({ label, value, onChangeText }) => {
   );
 };
 
-const App = () => {
+const NewWash = () => {
   const [washingMachineSize, setWashingMachineSize] = useState('');
   const [gallonsOfWater, setGallonsOfWater] = useState('');
   const [timeTaken, setTimeTaken] = useState('');
@@ -66,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default withNavigation(NewWash)
