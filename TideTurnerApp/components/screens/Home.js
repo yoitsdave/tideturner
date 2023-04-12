@@ -1,19 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 
+const getFilterEfficiency = () => {
+  // todo
+}
+
+
+const getMachineSettingGallons = () => {
+  // todo
+}
+
+const getName = () => {
+
+}
+
+const getMachine = () => {
+
+}
+
 export default HomeScreen = ({navigation}) => {
-  const [textEntries, setTextEntries] = useState([
-    'Entry 1',
-    'Entry 2',
-    'Entry 3',
-    'Entry 4',
-    'Entry 5',
-    'Entry 6',
-    'Entry 7',
-    'Entry 8',
-    'Entry 9',
-    'Entry 10',
-  ]);
+
+  const [textEntries, setTextEntries] = useState([]);
+
+  const textEntry = (name, machineSetting, filter, machine) => {
+    const userMachine = getMachine(machine);
+    const userName = getName(name);
+    const efficiency = getFilterEfficiency(filter);
+    const gallons = getMachineSettingGallons(machineSetting);
+    const entry = `${name} filtered out ${machineSetting} gallons 
+    with the ${machine}.`;
+    setTextEntries(prevEntries => [...prevEntries, entry]);
+  };
+
+  useEffect(() => {
+    textEntry('John Smith', 'Model XYZ', 75, 'In-Tank Filter');
+    textEntry('Jane Doe', 'Model ABC', 100, 'In-Line Filter');
+    textEntry('Bob Johnson', 'Model LMN', 50, 'UV Filter');
+  }, []);
 
   const styles = StyleSheet.create({
     container: {
