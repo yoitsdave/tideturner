@@ -24,14 +24,15 @@ SECRET_KEY = 'django-insecure-zq8m6daha-*rnrl!4bfmpb8cie1htr5_1=%o_4+^b6nzd3l8cs
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ADMIN_SITE_ON = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ["localhost"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'social_django',
     'drf_social_oauth2',
-]
+] + ([ 'django.contrib.admin' ] if ADMIN_SITE_ON else [] )
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -64,13 +65,13 @@ AUTHENTICATION_BACKENDS = (
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware', 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+] if ADMIN_SITE_ON else []
 
 ROOT_URLCONF = 'tideturnerweb.urls'
 

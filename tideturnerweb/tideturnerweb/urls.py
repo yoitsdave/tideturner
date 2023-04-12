@@ -13,10 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import include, path, re_path
+from django.conf import settings
 from rest_framework import routers
 from tideturnerweb import views
+
+if settings.ADMIN_SITE_ON:
+    from django.contrib import admin
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -28,6 +31,6 @@ router.register(r'follow', views.FollowingViewSet)
 urlpatterns = [
     path('api/', include(router.urls)),
     # path('accounts/', include('django.contrib.auth.urls')),
-    path('admin/', admin.site.urls),
     re_path(r'^auth/', include('drf_social_oauth2.urls', namespace='drf'))
-]
+] + ([path('admin/', admin.site.urls)] if settings.ADMIN_SITE_ON else []) 
+
