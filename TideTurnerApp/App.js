@@ -7,6 +7,7 @@ import LoginScreen from './components/screens/Login'
 import NewWashScreen from './components/screens/NewWash'
 import RegisterScreen from './components/screens/Register'
 import SetupMachineScreen from './components/screens/SetupMachine'
+import LeaderBoardScreen from './components/screens/LeaderBoard'
 
 
 const Stack = createNativeStackNavigator();
@@ -40,6 +41,11 @@ const App = () => {
         <Stack.Screen
           name="SetupMachine"
           component={SetupMachineScreen}
+        />
+
+        <Stack.Screen
+          name="LeaderBoard"
+          component={LeaderBoardScreen}
         />
         
       </Stack.Navigator>
