@@ -1,13 +1,14 @@
 import { View, TextInput, Text, Picker } from 'react-native';
 
 
-const getTextInput = (styles) => ({ label, value, onChangeText }) => {
+const getTextInput = (styles) => ({ label, value, onChangeText, secureTextEntry }) => {
     return (
       <View style={styles.inputContainer}>
         <Text style={styles.label}>{label}</Text>
         <TextInput
           style={styles.input}
           value={value}
+          secureTextEntry={secureTextEntry}
           onChangeText={onChangeText}
         />
       </View>
