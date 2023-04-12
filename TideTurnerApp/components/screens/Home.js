@@ -48,9 +48,14 @@ export default HomeScreen = ({navigation}) => {
       paddingBottom: 20,
     },
     buttonContainer: {
-      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '80%',
       paddingHorizontal: 10,
       marginBottom: 10,
+    },
+    button: {
+      width: 80,
     },
     textEntryContainer: {
       borderBottomWidth: 1,
@@ -77,27 +82,38 @@ export default HomeScreen = ({navigation}) => {
       <View style={styles.buttonContainer}>
         <Button
           title="Login"
+          style={styles.button}
           onPress={() => navigation.navigate('Login')}
         />
 
         <Button
           title="NewWash"
+          style={styles.button}
           onPress={() => navigation.navigate('NewWash')}
         />
 
         <Button
           title="LeaderBoard"
+          style={styles.button}
           onPress={() => navigation.navigate('LeaderBoard')}
         />
 
         <Button
           title="Register"
+          style={styles.button}
           onPress={() => navigation.navigate('Register')}
         />
 
         <Button
           title="SetupMachine"
+          style={styles.button}
           onPress={() => navigation.navigate('SetupMachine')}
+        />
+
+        <Button
+          title="Logout"
+          style={styles.button}
+          onPress={() => navigation.navigate('Logout')}
         />
       </View>
       

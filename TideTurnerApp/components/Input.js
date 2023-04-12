@@ -1,4 +1,5 @@
-import { View, TextInput, Text, Picker } from 'react-native';
+import { View, TextInput, Text } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 
 
 const getTextInput = (styles) => ({ label, value, onChangeText, secureTextEntry }) => {
@@ -17,7 +18,7 @@ const getTextInput = (styles) => ({ label, value, onChangeText, secureTextEntry 
 
 const getDropdownInput = (styles, options) => ({ label, value, onChangeText }) => {
     const pickerItems = options.map(option => (
-        <Picker.Item label={option.label} value={option.value} key={options.key}/>
+        <Picker.Item label={option.label} value={option.value} key={option.key}/>
     ))
 
     return (

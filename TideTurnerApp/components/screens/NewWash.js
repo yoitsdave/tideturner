@@ -13,9 +13,9 @@ const getFilterOptions = () => {
 
 const getMachineSettingOptions = () => {
   return [
-    {label: "first", value:"first", key:0},
-    {label: "second", value:"second", key:1},
-    {label: "third", value:"third", key:2},
+    {label: "first", value:"first", key:3},
+    {label: "second", value:"second", key:4},
+    {label: "third", value:"third", key:5},
   ];
 }
 const startWash = (washingMachineSetting, filter) => {
