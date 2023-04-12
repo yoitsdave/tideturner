@@ -1,25 +1,40 @@
 import React, { useState } from 'react';
-import { View, TextInput, Text, StyleSheet } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { View, Text, StyleSheet, Picker, TextInput } from 'react-native';
 
-export default NewWash = ({navigation}) => {
-
-const Input = ({ label, value, onChangeText }) => {
-  return (
-    <View style={styles.inputContainer}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput
-        style={styles.input}
-        value={value}
-        onChangeText={onChangeText}
-      />
-    </View>
-  );
-};
-
+export default NewWash = () => {
   const [washingMachineSize, setWashingMachineSize] = useState('');
   const [gallonsOfWater, setGallonsOfWater] = useState('');
   const [timeTaken, setTimeTaken] = useState('');
+
+  const Input = ({ label, value, onChangeText }) => {
+    if (label === "Gallons of Water") {
+      return (
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>{label}</Text>
+          <Picker
+            style={styles.input}
+            selectedValue={value}
+            onValueChange={onChangeText}
+          >
+            <Picker.Item label="Small" value="Small" />
+            <Picker.Item label="Medium" value="Medium" />
+            <Picker.Item label="Large" value="Large" />
+          </Picker>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>{label}</Text>
+          <TextInput
+            style={styles.input}
+            value={value}
+            onChangeText={onChangeText}
+          />
+        </View>
+      );
+    }
+  };
 
   const styles = StyleSheet.create({
     container: {
@@ -60,7 +75,7 @@ const Input = ({ label, value, onChangeText }) => {
         onChangeText={setGallonsOfWater}
       />
       <Input
-        label="Time Taken ("
+        label="Time Taken (Minutes)"
         value={timeTaken}
         onChangeText={setTimeTaken}
       />
