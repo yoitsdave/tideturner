@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 
+import { deleteUsernamePassword } from '../../KeyStore';
+
 const getFilterEfficiency = () => {
   // todo
 }
@@ -81,12 +83,6 @@ export default HomeScreen = ({navigation}) => {
 
       <View style={styles.buttonContainer}>
         <Button
-          title="Login"
-          style={styles.button}
-          onPress={() => navigation.navigate('Login')}
-        />
-
-        <Button
           title="NewWash"
           style={styles.button}
           onPress={() => navigation.navigate('NewWash')}
@@ -99,12 +95,6 @@ export default HomeScreen = ({navigation}) => {
         />
 
         <Button
-          title="Register"
-          style={styles.button}
-          onPress={() => navigation.navigate('Register')}
-        />
-
-        <Button
           title="SetupMachine"
           style={styles.button}
           onPress={() => navigation.navigate('SetupMachine')}
@@ -113,7 +103,13 @@ export default HomeScreen = ({navigation}) => {
         <Button
           title="Logout"
           style={styles.button}
-          onPress={() => navigation.navigate('Logout')}
+          onPress={() => {
+            deleteUsernamePassword();
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Launch' }],
+            });
+          }}
         />
       </View>
       

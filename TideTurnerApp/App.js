@@ -8,7 +8,7 @@ import NewWashScreen from './components/screens/NewWash'
 import RegisterScreen from './components/screens/Register'
 import SetupMachineScreen from './components/screens/SetupMachine'
 import LeaderBoardScreen from './components/screens/LeaderBoard'
-
+import LaunchScreen from './components/screens/Launch';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,9 +18,14 @@ const App = () => {
       <Stack.Navigator>
 
         <Stack.Screen
+          name="Launch"
+          component={LaunchScreen}
+          options={{title: 'Welcome'}}
+        />
+
+        <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'Welcome'}}
         />
 
         <Stack.Screen

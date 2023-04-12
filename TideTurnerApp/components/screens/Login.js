@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { StyleSheet, Button, View } from 'react-native';
 
 import { getTextInput } from '../Input';
+import { setUsernamePassword } from '../../KeyStore';
+import { requestAccessToken } from '../../Remote';
+
+import showAlert from '../Alert';
 
 const styles = StyleSheet.create({
     container: {
@@ -31,8 +35,18 @@ const styles = StyleSheet.create({
   
 const TextInput = getTextInput(styles);
 
-const logInUser = (username, password) => {
-    alert("logging in user with name " + username + " and password " + password);
+const logInUser = async (username, password, navigation) => {
+    await setUsernamePassword(username, password);
+    const success = await requestAccessToken();
+
+    if (success) {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }],
+      });
+    } else {
+      showAlert("failed... try again - if you're a new user, please register!");
+    }
 }
 
 export default LoginScreen = ({navigation}) => {
@@ -41,6 +55,13 @@ export default LoginScreen = ({navigation}) => {
   
     return (
         <View style={styles.container}>
+          <Button
+            title="I don't have an account!"
+            onPress={() => {
+                navigation.navigate("Register")
+            }}
+          />
+
           <TextInput
             label="Username"
             value={username}
@@ -57,7 +78,7 @@ export default LoginScreen = ({navigation}) => {
           <Button
             title="Log In"
             onPress={() => {
-                logInUser(username, password);
+                logInUser(username, password, navigation);
             }}
           />
     

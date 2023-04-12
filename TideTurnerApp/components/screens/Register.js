@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, Button, View } from 'react-native';
 
+
+import { setUsernamePassword } from '../../KeyStore';
+import { requestAccessToken, createNewUser } from '../../Remote';
+
 import { getTextInput } from '../Input';
+
+import showAlert from '../Alert';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -31,8 +38,24 @@ const styles = StyleSheet.create({
   
 const TextInput = getTextInput(styles);
 
-const registerUser = (username, password) => {
-    alert("registering user with name " + username + " and password " + password);
+const registerUser = async (username, password, navigation) => {
+  const success = await createNewUser(username, password);
+
+  if (success) {
+    await setUsernamePassword(username, password);
+    const success = await requestAccessToken();
+
+    if (success) {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }],
+      });
+    } else {
+      showAlert("something weird went wrong - can't help more but search code for WHOOPSIES!!");
+    }
+  } else{
+    showAlert("that username is taken! please try again");
+  }
 }
 
 export default RegisterScreen = ({navigation}) => {
@@ -41,6 +64,13 @@ export default RegisterScreen = ({navigation}) => {
   
     return (
         <View style={styles.container}>
+          <Button
+            title="I have an account already!"
+            onPress={() => {
+                navigation.navigate("Login")
+            }}
+          />
+
           <TextInput
             label="Username"
             value={username}
@@ -56,7 +86,7 @@ export default RegisterScreen = ({navigation}) => {
           <Button
             title="Register"
             onPress={() => {
-              registerUser(username, password);
+              registerUser(username, password, navigation);
             }}
           />
     
