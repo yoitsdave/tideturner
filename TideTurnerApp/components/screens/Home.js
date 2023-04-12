@@ -59,13 +59,6 @@ export default HomeScreen = ({navigation}) => {
     />
 
     <Button
-      title="SetupFilter"
-      onPress={() =>
-        navigation.navigate('SetupFilter')
-      }
-    />
-
-    <Button
       title="SetupMachine"
       onPress={() =>
         navigation.navigate('SetupMachine')

@@ -6,7 +6,6 @@ import HomeScreen from './components/screens/Home'
 import LoginScreen from './components/screens/Login'
 import NewWashScreen from './components/screens/NewWash'
 import RegisterScreen from './components/screens/Register'
-import SetupFilterScreen from './components/screens/SetupFilter'
 import SetupMachineScreen from './components/screens/SetupMachine'
 
 
@@ -36,11 +35,6 @@ const App = () => {
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
-        />
-
-        <Stack.Screen
-          name="SetupFilter"
-          component={SetupFilterScreen}
         />
 
         <Stack.Screen
