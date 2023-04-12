@@ -43,8 +43,14 @@ export default HomeScreen = ({navigation}) => {
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       paddingTop: 50,
+      paddingBottom: 20,
+    },
+    buttonContainer: {
+      width: '100%',
+      paddingHorizontal: 10,
+      marginBottom: 10,
     },
     textEntryContainer: {
       borderBottomWidth: 1,
@@ -60,35 +66,6 @@ export default HomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
 
-    <Button
-      title="Login"
-      onPress={() =>
-        navigation.navigate('Login')
-      }
-    />
-
-    <Button
-      title="NewWash"
-      onPress={() =>
-        navigation.navigate('NewWash')
-      }
-    />
-
-    <Button
-      title="Register"
-      onPress={() =>
-        navigation.navigate('Register')
-      }
-    />
-
-    <Button
-      title="SetupMachine"
-      onPress={() =>
-        navigation.navigate('SetupMachine')
-      }
-    />
-
-
       <ScrollView>
         {textEntries.map((entry, index) => (
           <View key={index} style={styles.textEntryContainer}>
@@ -96,6 +73,34 @@ export default HomeScreen = ({navigation}) => {
           </View>
         ))}
       </ScrollView>
+
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Login"
+          onPress={() => navigation.navigate('Login')}
+        />
+
+        <Button
+          title="NewWash"
+          onPress={() => navigation.navigate('NewWash')}
+        />
+
+        <Button
+          title="LeaderBoard"
+          onPress={() => navigation.navigate('LeaderBoard')}
+        />
+
+        <Button
+          title="Register"
+          onPress={() => navigation.navigate('Register')}
+        />
+
+        <Button
+          title="SetupMachine"
+          onPress={() => navigation.navigate('SetupMachine')}
+        />
+      </View>
+      
     </View>
   );
 }
