@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NewWash = () => {
+export default NewWash = ({navigation}) => {
   const [washingMachineSettingOpts, setWashingMachineSettingOpts] = useState([]);
   const [filterOpts, setFilterOpts] = useState([]);
 
@@ -47,11 +47,15 @@ export default NewWash = () => {
   useEffect(() => {
     getMachineSettingOptions().then( (options) => {
       setWashingMachineSettingOpts(options);
-      setWashingMachineSetting(options[0].value)
+      if (options.length > 0) {
+        setWashingMachineSetting(options[0].value)
+      }
     });
     getFilterOptions().then( (options) => {
       setFilterOpts(options);
-      setFilter(options[0].value)
+      if (options.length > 0) {
+        setFilter(options[0].value)
+      }
     });
   }, [])
 
@@ -71,6 +75,7 @@ export default NewWash = () => {
         title="Start"
         onPress={() => {
           startWash(washingMachineSetting, filter);
+          navigation.navigate("Home");
         }}
     />
 

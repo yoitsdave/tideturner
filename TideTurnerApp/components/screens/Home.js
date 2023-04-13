@@ -2,42 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import { deleteUsernamePassword } from '../../KeyStore';
+import { getRuns, getFilterName, getUserName, getMachineSettingGallons } from '../../Remote';
 
-const getFilterEfficiency = () => {
-  // todo
-}
-
-
-const getMachineSettingGallons = () => {
-  // todo
-}
-
-const getName = () => {
-
-}
-
-const getMachine = () => {
-
-}
 
 export default HomeScreen = ({navigation}) => {
 
   const [textEntries, setTextEntries] = useState([]);
 
-  const textEntry = (name, machineSetting, filter, machine) => {
-    const userMachine = getMachine(machine);
-    const userName = getName(name);
-    const efficiency = getFilterEfficiency(filter);
-    const gallons = getMachineSettingGallons(machineSetting);
-    const entry = `${name} filtered out ${machineSetting} gallons 
-    with the ${machine}.`;
+  const textEntry = (userName, gallons, filterName) => {
+    const entry = `${userName} filtered out ${gallons} gallons 
+    with the ${filterName}.`;
+
     setTextEntries(prevEntries => [...prevEntries, entry]);
   };
 
   useEffect(() => {
-    textEntry('John Smith', 'Model XYZ', 75, 'In-Tank Filter');
-    textEntry('Jane Doe', 'Model ABC', 100, 'In-Line Filter');
-    textEntry('Bob Johnson', 'Model LMN', 50, 'UV Filter');
+    getRuns().then( (results) => {
+      results.map( async (result) => {
+        const userName = await getUserName(result[0]);
+        const gallons = await getMachineSettingGallons(result[1]);
+        const filterName = await getFilterName(result[2]);
+
+        textEntry(userName, gallons, filterName);
+      })
+    });
   }, []);
 
   const styles = StyleSheet.create({

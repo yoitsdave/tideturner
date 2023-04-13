@@ -217,4 +217,114 @@ const createRun = async (washingMachineSetting, filter) => {
     }
 }
 
-export { requestAccessToken, createNewUser, getFilterOptions, getMachineSettingOptions, createMachineSetting, createRun };
+const getRuns = async () => {
+    await requestAccessToken();
+    const url = BASE_URL + "api/runs/";
+
+    try {
+        const rawResponse = await fetch(url, {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + await getAccessToken()
+            }
+        });
+        
+        const content = await rawResponse.json();
+
+        if ("error" in content) {
+            return null;
+        } else{
+            const output = content.results.map ( (result) => {
+                return [result.owner, result.setting, result.filter];
+            });
+
+            return output;
+        }
+
+    } catch (e) {
+        showAlert(e);
+        return false;
+    }
+
+}
+
+const getFilterName = async (id) => {
+    await requestAccessToken();
+    const url = BASE_URL + "api/filters/" + id;
+
+    try {
+        const rawResponse = await fetch(url, {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + await getAccessToken()
+            }
+        });
+        
+        const content = await rawResponse.json();
+
+        if ("error" in content) {
+            return null;
+        } else{
+            return content.filter_name;
+        }
+
+    } catch (e) {
+        showAlert(e);
+        return false;
+    }
+}
+
+const getUserName = async (id) => {
+    await requestAccessToken();
+    const url = BASE_URL + "api/users/" + id;
+
+    try {
+        const rawResponse = await fetch(url, {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + await getAccessToken()
+            }
+        });
+        
+        const content = await rawResponse.json();
+
+        if ("error" in content) {
+            return null;
+        } else{
+            return content.username;
+        }
+
+    } catch (e) {
+        showAlert(e);
+        return false;
+    }
+}
+
+const getMachineSettingGallons = async (id) => {
+    await requestAccessToken();
+    const url = BASE_URL + "api/machines/" + id;
+
+    try {
+        const rawResponse = await fetch(url, {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + await getAccessToken()
+            }
+        });
+        
+        const content = await rawResponse.json();
+
+        if ("error" in content) {
+            return null;
+        } else{
+            return content.water_capacity;
+        }
+
+    } catch (e) {
+        showAlert(e);
+        return false;
+    }
+}
+
+
+export { getMachineSettingGallons, getFilterName, getUserName, requestAccessToken, createNewUser, getFilterOptions, getMachineSettingOptions, createMachineSetting, createRun, getRuns };
