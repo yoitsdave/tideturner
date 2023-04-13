@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.views.generic import TemplateView
 from tideturnerweb.models import WashingMachineSetting, MicroplasticFilter, WashingMachineRun, Following
 from rest_framework import viewsets, permissions, status
@@ -42,6 +43,14 @@ class WashingMachineSettingViewSet(viewsets.ModelViewSet):
     queryset = WashingMachineSetting.objects.all().order_by("-created_on")
     serializer_class = WashingMachineSettingSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        lookups = Q(owner=self.request.user)
+
+        return self.queryset.filter(lookups)
 
 class MicroplasticFilterViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = MicroplasticFilter.objects.all().order_by("-created_on")

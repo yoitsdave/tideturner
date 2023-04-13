@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class WashingMachineSetting(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="machine_settings")
     machine_name = models.CharField(max_length=256)
     setting_name = models.CharField(max_length=256)
     water_capacity = models.FloatField()

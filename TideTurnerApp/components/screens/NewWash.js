@@ -1,26 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 
 import { getDropdownInput } from '../Input';
 
-const getFilterOptions = () => {
-  return [
-    {label: "first", value:"first", key:0},
-    {label: "second", value:"second", key:1},
-    {label: "third", value:"third", key:2},
-  ];
+import { createRun, getFilterOptions, getMachineSettingOptions } from '../../Remote';
+
+const startWash = (washingMachineSetting, filter) => {
+  createRun(washingMachineSetting, filter);
 }
 
-const getMachineSettingOptions = () => {
-  return [
-    {label: "first", value:"first", key:3},
-    {label: "second", value:"second", key:4},
-    {label: "third", value:"third", key:5},
-  ];
-}
-const startWash = (washingMachineSetting, filter) => {
-  alert("started wash on " + washingMachineSetting + " with filter " + filter);
-}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -48,11 +36,24 @@ const styles = StyleSheet.create({
 });
 
 export default NewWash = () => {
+  const [washingMachineSettingOpts, setWashingMachineSettingOpts] = useState([]);
+  const [filterOpts, setFilterOpts] = useState([]);
+
   const [washingMachineSetting, setWashingMachineSetting] = useState('');
   const [filter, setFilter] = useState('');
 
-  const MachineSettingInput = getDropdownInput(styles, getMachineSettingOptions());
-  const FilterInput = getDropdownInput(styles, getFilterOptions());
+  var MachineSettingInput = getDropdownInput(styles, washingMachineSettingOpts);
+  var FilterInput = getDropdownInput(styles, filterOpts);
+  useEffect(() => {
+    getMachineSettingOptions().then( (options) => {
+      setWashingMachineSettingOpts(options);
+      setWashingMachineSetting(options[0].value)
+    });
+    getFilterOptions().then( (options) => {
+      setFilterOpts(options);
+      setFilter(options[0].value)
+    });
+  }, [])
 
   return (
     <View style={styles.container}>

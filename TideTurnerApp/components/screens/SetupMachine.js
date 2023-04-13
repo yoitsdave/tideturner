@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import { getTextInput } from '../Input';
 
-const submitNewMachine = (loadSize, duration) => {
-  alert("submitted " + loadSize + ", " + duration);
-}
+import { createMachineSetting } from '../../Remote';
 
 const styles = StyleSheet.create({
   container: {
@@ -88,9 +86,10 @@ export default SetupMachineScreen = ({navigation}) => {
       <Button
         title="Submit"
         onPress={() => {
-          submitNewMachine(loadSizeSmall, loadDurationSmall);
-          submitNewMachine(loadSizeMedium, loadDurationMedium);
-          submitNewMachine(loadSizeLarge, loadDurationLarge);
+          createMachineSetting(washingMachineName, "Small", loadSizeSmall, loadDurationSmall);
+          createMachineSetting(washingMachineName, "Medium", loadSizeMedium, loadDurationMedium);
+          createMachineSetting(washingMachineName, "Large", loadSizeLarge, loadDurationLarge);
+          navigation.navigate("Home");
         }}
       />
 

@@ -28,7 +28,7 @@ ADMIN_SITE_ON = True
 
 
 ALLOWED_HOSTS = ["localhost"]
-
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'social_django',
     'drf_social_oauth2',
+    'corsheaders',
+
 ] + ([ 'django.contrib.admin' ] if ADMIN_SITE_ON else [] )
 
 REST_FRAMEWORK = {
@@ -66,12 +68,13 @@ AUTHENTICATION_BACKENDS = (
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware', 
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-] if ADMIN_SITE_ON else []
+] if ADMIN_SITE_ON else [ "corsheaders.middleware.CorsMiddleware"]
 
 ROOT_URLCONF = 'tideturnerweb.urls'
 

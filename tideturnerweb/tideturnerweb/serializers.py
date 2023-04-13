@@ -1,28 +1,53 @@
 from django.contrib.auth.models import User, Group
 from tideturnerweb.models import WashingMachineSetting, MicroplasticFilter, WashingMachineRun, Following
 from rest_framework import serializers
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+    
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups', "followers", "following", "runs"]
+        fields = ["id", 'url', 'username', 'email', 'groups', "followers", "following", "runs"]
 
-class WashingMachineSettingSerializer(serializers.HyperlinkedModelSerializer):
+class WashingMachineSettingSerializer(serializers.ModelSerializer):
+    owner = serializers.PrimaryKeyRelatedField(
+        read_only=True, 
+        default=serializers.CurrentUserDefault()
+    )
+
     class Meta:
         model = WashingMachineSetting
-        fields = ["machine_name", "setting_name", "water_capacity", "duration", "created_on", "runs"]
+        fields = ["id", "machine_name", "setting_name", "water_capacity", "duration", "created_on", "runs", "owner"]
 
-class MicroplasticFilterSerializer(serializers.HyperlinkedModelSerializer):
+class MicroplasticFilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = MicroplasticFilter
-        fields = ["filter_name", "created_on", "mp_ratio", "runs"]
+        fields = ["id", "filter_name", "created_on", "mp_ratio", "runs"]
 
-class WashingMachineRunSerializer(serializers.HyperlinkedModelSerializer):
+class WashingMachineRunSerializer(serializers.ModelSerializer):
+    owner = serializers.PrimaryKeyRelatedField(
+        read_only=True, 
+        default=serializers.CurrentUserDefault()
+    )
+
     class Meta:
         model = WashingMachineRun
-        fields = ["owner", "setting", "filter", "started", "notified"]
 
-class FollowingSerializer(serializers.HyperlinkedModelSerializer):
+        fields = ["id", "setting", "filter", "started", "notified", "owner"]
+
+    def create(self, validated_data):
+        run = WashingMachineRun(
+            setting=validated_data["setting"],
+            filter=validated_data["filter"],
+            owner=self.context['request'].user
+        )
+
+        run.save()
+        return run
+
+class FollowingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Following
-        fields = ["follower", "followed"]
+        follower = serializers.PrimaryKeyRelatedField(
+            read_only=True, 
+            default=serializers.CurrentUserDefault()
+        )
+        fields = ["followed"]

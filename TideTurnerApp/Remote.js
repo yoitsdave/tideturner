@@ -2,6 +2,7 @@ import { getUsernamePassword, setAccessToken, getAccessToken, deleteAccessToken 
 import queryString from 'query-string'; // import the queryString class
 
 import showAlert from "./components/Alert";
+import { l } from "i18n-js";
 
 // NOTE: THIS IS TERRIBLE TERRIBLE TERRIBLE SECURITY PRACTICE! IDGAF!!!
 const CLIENT_ID="qrZApfV8Ergh0qSyDxNzup3aGaa7d7LCSTH2NfE5";
@@ -70,9 +71,150 @@ const createNewUser = async (username, password) => {
             return true;
         }
     } catch (e) {
-        alert(e);
+        showAlert(e);
+        return false;
     }
 
 }
 
-export { requestAccessToken, createNewUser };
+const getMachineSettingOptions = async () => {
+    await requestAccessToken();
+    const url = BASE_URL + "api/machines/";
+
+    try {
+        const rawResponse = await fetch(url, {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + await getAccessToken()
+            }
+        });
+        
+        const content = await rawResponse.json();
+
+        if ("error" in content) {
+            return null;
+        } else{
+            var i = 0;
+            const output = content.results.map ( (result) => {
+                return {
+                    "label": result.machine_name + " (" + result.setting_name + ")",
+                    "value": result.id,
+                    "key": i++
+                }});
+            console.log(output);
+            return output;
+        }
+
+    } catch (e) {
+        showAlert(e);
+        return false;
+    }
+};
+
+const getFilterOptions = async () => {
+    await requestAccessToken();
+    const url = BASE_URL + "api/filters/";
+
+    try {
+        const rawResponse = await fetch(url, {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + await getAccessToken()
+            }
+        });
+        
+        const content = await rawResponse.json();
+
+        if ("error" in content) {
+            return null;
+        } else{
+            var i = 10000;
+            const output = content.results.map ( (result) => {
+                console.log(result)
+
+                return {
+                    "label": result.filter_name,
+                    "value": result.id,
+                    "key": i++
+                }});
+            console.log(output);
+            return output;
+        }
+
+    } catch (e) {
+        showAlert(e);
+        return false;
+    }
+
+};
+
+
+const createMachineSetting = async (name, setting, capacity, duration) => {
+    await requestAccessToken();
+
+    const url = BASE_URL + "api/machines/";
+    const data = {
+        "machine_name": name,
+        "setting_name": setting,
+        "water_capacity": capacity,
+        "duration": duration,
+    }
+    
+    try {
+        
+        const rawResponse = await fetch(url, {
+            method: "POST",
+            headers: {
+                'Authorization': "Bearer " + await getAccessToken(),
+                'Content-Type':'application/x-www-form-urlencoded'
+            },
+            body: queryString.stringify(data)
+        });
+        
+        const content = await rawResponse.json();
+
+        if ("error" in content) {
+            return false;
+        } else{
+            return true;
+        }
+    } catch (e) {
+        showAlert(e);
+        return false;
+    }
+}
+
+const createRun = async (washingMachineSetting, filter) => {
+    await requestAccessToken();
+
+    const url = BASE_URL + "api/runs/";
+    const data = {
+        "setting": washingMachineSetting,
+        "filter": filter,
+    }
+    
+    try {
+        
+        const rawResponse = await fetch(url, {
+            method: "POST",
+            headers: {
+                'Authorization': "Bearer " + await getAccessToken(),
+                'Content-Type':'application/x-www-form-urlencoded'
+            },
+            body: queryString.stringify(data)
+        });
+        
+        const content = await rawResponse.json();
+
+        if ("error" in content) {
+            return false;
+        } else{
+            return true;
+        }
+    } catch (e) {
+        showAlert(e);
+        return false;
+    }
+}
+
+export { requestAccessToken, createNewUser, getFilterOptions, getMachineSettingOptions, createMachineSetting, createRun };
