@@ -37,7 +37,7 @@ class WashingMachineRunSerializer(serializers.ModelSerializer):
         run = WashingMachineRun(
             setting=validated_data["setting"],
             filter=validated_data["filter"],
-            user=self.context['request'].user
+            owner=self.context['request'].user
         )
 
         run.save()
