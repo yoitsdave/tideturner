@@ -1,14 +1,18 @@
 import { getUsernamePassword, setAccessToken, getAccessToken, deleteAccessToken } from "./KeyStore";
-import queryString from 'query-string'; // import the queryString class
-
-import showAlert from "./components/Alert";
-import { l } from "i18n-js";
+import queryString from 'query-string';
+import Constants from 'expo-constants';
 
 // NOTE: THIS IS TERRIBLE TERRIBLE TERRIBLE SECURITY PRACTICE! IDGAF!!!
 const CLIENT_ID="qrZApfV8Ergh0qSyDxNzup3aGaa7d7LCSTH2NfE5";
 const CLIENT_SECRET="secret";
-const BASE_URL="http://localhost:8000/"
 
+const BASE_URL=Constants.expoConfig.extra.apiUrl;
+console.log(BASE_URL);
+
+// REMEMBER TO RUN: ngrok http 8000 
+// AND THEN SET ENVIRONMENT VAR API_URL
+// TO THE NGROK URI IF YOU WANT TO RUN OVER
+// EXPO TUNNEL!!
 
 const requestAccessToken = async () => {
     const [username, password] = await getUsernamePassword();
@@ -39,7 +43,7 @@ const requestAccessToken = async () => {
             return true;
         }
     } catch (e) {
-        showAlert(e);
+        alert(e);
     }
 
 
@@ -71,7 +75,7 @@ const createNewUser = async (username, password) => {
             return true;
         }
     } catch (e) {
-        showAlert(e);
+        alert(e);
         return false;
     }
 
@@ -106,7 +110,7 @@ const getMachineSettingOptions = async () => {
         }
 
     } catch (e) {
-        showAlert(e);
+        alert(e);
         return false;
     }
 };
@@ -142,7 +146,7 @@ const getFilterOptions = async () => {
         }
 
     } catch (e) {
-        showAlert(e);
+        alert(e);
         return false;
     }
 
@@ -179,7 +183,7 @@ const createMachineSetting = async (name, setting, capacity, duration) => {
             return true;
         }
     } catch (e) {
-        showAlert(e);
+        alert(e);
         return false;
     }
 }
@@ -212,7 +216,7 @@ const createRun = async (washingMachineSetting, filter) => {
             return true;
         }
     } catch (e) {
-        showAlert(e);
+        alert(e);
         return false;
     }
 }
@@ -242,7 +246,7 @@ const getRuns = async () => {
         }
 
     } catch (e) {
-        showAlert(e);
+        alert(e);
         return false;
     }
 
@@ -269,7 +273,7 @@ const getFilterName = async (id) => {
         }
 
     } catch (e) {
-        showAlert(e);
+        alert(e);
         return false;
     }
 }
@@ -295,7 +299,7 @@ const getUserName = async (id) => {
         }
 
     } catch (e) {
-        showAlert(e);
+        alert(e);
         return false;
     }
 }
@@ -321,7 +325,7 @@ const getMachineSettingGallons = async (id) => {
         }
 
     } catch (e) {
-        showAlert(e);
+        alert(e);
         return false;
     }
 }

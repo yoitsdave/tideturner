@@ -5,8 +5,6 @@ import { getTextInput } from '../Input';
 import { setUsernamePassword } from '../../KeyStore';
 import { requestAccessToken } from '../../Remote';
 
-import showAlert from '../Alert';
-
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -45,7 +43,7 @@ const logInUser = async (username, password, navigation) => {
         routes: [{ name: 'Home' }],
       });
     } else {
-      showAlert("failed... try again - if you're a new user, please register!");
+      alert("failed... try again - if you're a new user, please register!");
     }
 }
 

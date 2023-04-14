@@ -7,8 +7,6 @@ import { requestAccessToken, createNewUser } from '../../Remote';
 
 import { getTextInput } from '../Input';
 
-import showAlert from '../Alert';
-
 
 const styles = StyleSheet.create({
     container: {
@@ -51,10 +49,10 @@ const registerUser = async (username, password, navigation) => {
         routes: [{ name: 'Home' }],
       });
     } else {
-      showAlert("something weird went wrong - can't help more but search code for WHOOPSIES!!");
+      alert("something weird went wrong - can't help more but search code for WHOOPSIES!!");
     }
   } else{
-    showAlert("that username is taken! please try again");
+    alert("that username is taken! please try again");
   }
 }
 

@@ -27,7 +27,7 @@ DEBUG = True
 ADMIN_SITE_ON = True
 
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost", ".ngrok-free.app"]
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition

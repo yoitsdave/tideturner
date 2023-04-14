@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Button, View } from 'react-native';
 
-import showAlert from '../Alert';
-
 const styles = StyleSheet.create({
     container: {
       flex: 1,
