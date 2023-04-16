@@ -29,15 +29,21 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
                             status=status.HTTP_403_FORBIDDEN)
         
         try:
-            user = User.objects.create_user(username=request.data["username"],
-                                            password=request.data["username"])
+            user = User.objects.create_user(request.data["username"], 
+                                            "example@example.com",
+                                            request.data["password"])
+            
+
+            user.save()
+
+            print("creating user", request.data["username"], "with pw", request.data["password"])
+
+            return Response({'status': 'user created'})
         except Exception:
             return Response({"error": "User creation failed"},
                            status=status.HTTP_403_FORBIDDEN)
 
 
-        user.save()
-        return Response({'status': 'user created'})
 
 class WashingMachineSettingViewSet(viewsets.ModelViewSet):
     queryset = WashingMachineSetting.objects.all().order_by("-created_on")
@@ -49,6 +55,8 @@ class WashingMachineSettingViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         lookups = Q(owner=self.request.user)
+
+        print(self.request.user.username)
 
         return self.queryset.filter(lookups)
 

@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='washingmachinesetting',
             name='owner',
-            field=models.ForeignKey(default=User.objects.filter(is_superuser=True).first().id, on_delete=django.db.models.deletion.CASCADE, related_name='machine_settings', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='machine_settings', to=settings.AUTH_USER_MODEL),
             preserve_default=False,
         ),
     ]

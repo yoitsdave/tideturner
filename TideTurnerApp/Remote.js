@@ -3,7 +3,7 @@ import queryString from 'query-string';
 import Constants from 'expo-constants';
 
 // NOTE: THIS IS TERRIBLE TERRIBLE TERRIBLE SECURITY PRACTICE! IDGAF!!!
-const CLIENT_ID="qrZApfV8Ergh0qSyDxNzup3aGaa7d7LCSTH2NfE5";
+const CLIENT_ID="UHrH5Y5kMjlpJ07Y3Erl9xhKT8OjkYBnzD9BUigY";
 const CLIENT_SECRET="secret";
 
 const BASE_URL=Constants.expoConfig.extra.apiUrl;
@@ -27,6 +27,7 @@ const requestAccessToken = async () => {
     }
     
     try {
+
         
         const rawResponse = await fetch(url, {
             method: "POST",
@@ -37,6 +38,8 @@ const requestAccessToken = async () => {
         const content = await rawResponse.json();
 
         if ("error" in content) {
+            console.log("asked: " + JSON.stringify(data));
+            console.log("recieved: " + JSON.stringify(content))
             return false;
         } else{
             setAccessToken(content["access_token"]);
@@ -72,6 +75,7 @@ const createNewUser = async (username, password) => {
         if ("error" in content) {
             return false;
         } else{
+            console.log("created new user " + username + " (pw: " + password + ")")
             return true;
         }
     } catch (e) {
@@ -105,7 +109,6 @@ const getMachineSettingOptions = async () => {
                     "value": result.id,
                     "key": i++
                 }});
-            console.log(output);
             return output;
         }
 
@@ -134,14 +137,11 @@ const getFilterOptions = async () => {
         } else{
             var i = 10000;
             const output = content.results.map ( (result) => {
-                console.log(result)
-
                 return {
                     "label": result.filter_name,
                     "value": result.id,
                     "key": i++
                 }});
-            console.log(output);
             return output;
         }
 

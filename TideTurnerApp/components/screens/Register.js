@@ -41,6 +41,7 @@ const registerUser = async (username, password, navigation) => {
 
   if (success) {
     await setUsernamePassword(username, password);
+
     const success = await requestAccessToken();
 
     if (success) {
