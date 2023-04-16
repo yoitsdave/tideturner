@@ -62,17 +62,17 @@ export default LeaderBoard = ({navigation}) => {
     return (
         <View style={styles.container}>
             <div className="board">
-                <h1 className='leaderboard'>Leaderboard</h1>
+                <h1 className='leaderboard'><Text>Leaderboard</Text></h1>
                 <div className="duration">
-                    <button onClick={handleClick} data-id='0'>Number of Gallons</button>
-                    <button onClick={handleClick} data-id='1'>Time Washed</button>
+                    <button onClick={handleClick} data-id='0'><Text>Number of Gallons</Text></button>
+                    <button onClick={handleClick} data-id='1'><Text>Time Washed</Text></button>
                 </div>
                 <table>
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Filter Used</th>
-                            <th>Number of Gallons Washed</th>
+                            <th><Text>Name</Text></th>
+                            <th><Text>Filter Used</Text></th>
+                            <th><Text>Number of Gallons Washed</Text></th>
                         </tr>
                     </thead>
                     <tbody>
