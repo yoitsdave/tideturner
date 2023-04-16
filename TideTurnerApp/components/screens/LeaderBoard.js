@@ -3,18 +3,15 @@ import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import { getRuns } from '../../Remote';
 
 const getName = (run) => {
-    //todo: implement method to get name from run object
-    return "John Doe";
+    return run.name;
 }
 
 const getFilter = (run) => {
-    //todo: implement method to get filter from run object
-    return "Chlora ball filter";
+    return run.filter;
 }
 
 const getGallons = (run) => {
-    //todo: implement method to get gallons from run object
-    return 100;
+  return run.score;
 }
 
 export default LeaderBoard = ({navigation}) => {
@@ -30,13 +27,13 @@ export default LeaderBoard = ({navigation}) => {
             backgroundColor: '#fff',
             alignItems: 'center',
             justifyContent: 'center',
-            paddingTop: 100,
+            paddingTop: 50,
         },
         textEntryContainer: {
             borderBottomWidth: 1,
             borderBottomColor: '#ccc',
             paddingVertical: 50,
-            paddingHorizontal: 10,
+            paddingHorizontal: 5,
         },
         textEntry: {
             fontSize: 14,
@@ -45,12 +42,12 @@ export default LeaderBoard = ({navigation}) => {
 
     //Dummy data for the table
     const runs = [
-        {id: 1, dt: new Date(), score: 100},
-        {id: 2, dt: new Date(), score: 50},
-        {id: 3, dt: new Date(), score: 75},
-        {id: 4, dt: new Date(), score: 200},
-        {id: 5, dt: new Date(), score: 25},
-    ];
+      {id: 1, score: 100, name: "Alice", filter: "Chlora ball filter"},
+      {id: 2, score: 50, name: "Bob", filter: "Carbon filter"},
+      {id: 3, score: 75, name: "Charlie", filter: "Reverse osmosis filter"},
+      {id: 4, score: 200, name: "Dave", filter: "Chlora ball filter"},
+      {id: 5, score: 25, name: "Eve", filter: "Carbon filter"},
+  ];
 
     //Filter runs based on selected period
     let filteredRuns;
@@ -60,8 +57,7 @@ export default LeaderBoard = ({navigation}) => {
         filteredRuns = between(runs, 7);
     }
 
-    //Sort runs by gallons washed in descending order
-    filteredRuns.sort((a, b) => b.score - a.score);
+    filteredRuns.sort((a, b) => getGallons(b) - getGallons(a));
 
     return (
         <View style={styles.container}>
