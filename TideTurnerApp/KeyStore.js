@@ -26,8 +26,8 @@ const getUsernamePassword = async () => {
 
 const deleteUsernamePassword = async () => {
     try {
-        await AsyncStorage.setItem('@username', null);
-        await AsyncStorage.setItem('@password', null);
+        await AsyncStorage.removeItem('@username');
+        await AsyncStorage.removeItem('@password');
     } catch (e) {
         alert("failed to set asyncstorage!" + e);
     }
@@ -51,7 +51,7 @@ const getAccessToken = async () => {
 
 const deleteAccessToken = async () => {
     try {
-        await AsyncStorage.setItem('@access_token', null);
+        await AsyncStorage.removeItem('@access_token');
     } catch (e) {
         alert("failed to set asyncstorage!" + e);
     }
