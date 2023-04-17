@@ -3,7 +3,7 @@ import queryString from 'query-string';
 import Constants from 'expo-constants';
 
 // NOTE: THIS IS TERRIBLE TERRIBLE TERRIBLE SECURITY PRACTICE! IDGAF!!!
-const CLIENT_ID="qrZApfV8Ergh0qSyDxNzup3aGaa7d7LCSTH2NfE5";
+const CLIENT_ID="UHrH5Y5kMjlpJ07Y3Erl9xhKT8OjkYBnzD9BUigY";
 const CLIENT_SECRET="secret";
 
 const BASE_URL=Constants.expoConfig.extra.apiUrl;
